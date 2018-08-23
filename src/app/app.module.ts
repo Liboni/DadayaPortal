@@ -23,7 +23,6 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     StaffComponent,
     EventsComponent,
     ProjectsComponent,
-    GalleryComponent,
     LoginComponent,
     GalleryComponent
   ],
