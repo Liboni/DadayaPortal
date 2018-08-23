@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppBoostrapModule } from './modules/app-boostrap/app-boostrap.module';
-import { PortalComponent } from './components/portal/portal.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewsComponent } from './components/news/news.component';
 import { NoticesComponent } from './components/notices/notices.component';
@@ -18,7 +17,6 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PortalComponent,
     LoginComponent,
     NewsComponent,
     NoticesComponent,
@@ -26,6 +24,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     EventsComponent,
     ProjectsComponent,
     GalleryComponent,
+    LoginComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
