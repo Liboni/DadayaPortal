@@ -4,21 +4,22 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppBoostrapModule } from './modules/app-boostrap/app-boostrap.module';
-import { PortalComponent } from './components/portal/portal.component';
 import { LoginComponent } from './components/login/login.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PortalComponent,
-    LoginComponent
+    LoginComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,
     AppBoostrapModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
+      { path: 'gallery', component: GalleryComponent }
     ])
   ],
   providers: [],
