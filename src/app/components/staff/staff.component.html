@@ -1,0 +1,40 @@
+<div class="form col-4 offset-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title center ">Staff</h5>
+      <form #StaffRegistrationForm="ngForm" novalidate (ngSubmit)="onSubmit(StaffRegistrationForm)">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" class="form-control" name="fullName" [(ngModel)]="staff.fullName" required #fullName="ngModel">
+
+        </div>
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input type="text" class="form-control" name="position" [(ngModel)]="staff.position" #position="ngModel" >
+
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="number" class="form-control" name="phoneNumber" [(ngModel)]="staff.phoneNumber" #phoneNumber="ngModel" >
+
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="staff.email" #email="ngModel" >
+
+        </div>
+        <div class="form-group">
+          <label for="username">Department</label>
+          <select class="form-control">
+            <option>Select Department</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" class="form-control" name="image" [(ngModel)]="staff.image" #username="ngModel" >
+        </div>
+        <button type="submit" class="btn btn-primary float-right" [disabled]="!StaffRegistrationForm.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

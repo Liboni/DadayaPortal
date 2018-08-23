@@ -1,0 +1,23 @@
+<div class="form col-4 offset-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title center">Notice</h5>
+      <form #NoticeForm="ngForm" novalidate (ngSubmit)="onSubmit(NoticeForm)">
+        <div class="form-group">
+          <label for="heading">Heading</label>
+          <input type="text" class="form-control" name="heading" [(ngModel)]="notice.heading" required #heading="ngModel">
+
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" class="form-control" name="image" [(ngModel)]="notice.image" #image="ngModel">
+        </div>
+        <button type="submit" class="btn btn-primary float-right" [disabled]="!NoticeForm.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

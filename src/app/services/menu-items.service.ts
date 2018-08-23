@@ -17,16 +17,19 @@ export class MenuItemsService {
       {
         name: 'User Management',
         items: [
-          { name: 'Staff', icon: 'ion-ios-cog-outline', router: '/teachers', permission: Permission.None },
+          { name: 'Staff', icon: 'ion-ios-cog-outline', router: '/staff', permission: Permission.None },
           { name: 'Permissions', icon: 'ion-ios-people-outline', router: '/students', permission: Permission.None }
         ]
       },
 
       {
-        name: 'News Management',
+        name: 'Content Management',
         items: [
-          { name: 'Events', icon: 'ion-ios-download-outline', router: '/claims', permission: Permission.None },
-          { name: 'Notices', icon: 'ion-ios-download-outline', router: '/claims', permission: Permission.None }
+          { name: 'Events', icon: 'ion-ios-download-outline', router: '/events', permission: Permission.None },
+          { name: 'Notices', icon: 'ion-ios-download-outline', router: '/notice', permission: Permission.None },
+          { name: 'Projects', icon: 'ion-ios-download-outline', router: '/projects', permission: Permission.None },
+          { name: 'Gallery', icon: 'ion-ios-download-outline', router: '/gallery', permission: Permission.None },
+          { name: 'News', icon: 'ion-ios-download-outline', router: '/news', permission: Permission.None }
         ]
       }
     ];
