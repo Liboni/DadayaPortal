@@ -1,0 +1,101 @@
+.btn-primary{
+    border-color: #095407;
+}
+a{   
+    color:  #095407;
+}
+.bg-theme, .btn-primary{
+    background: #095407;
+    color: white;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #6d000a;
+    border-color: #6d000a;
+}
+
+a.btn-default{
+    color: #095407;
+}
+
+.btn, .form-control{
+    border-radius: 0;
+}
+
+.btn {
+    padding: 0.2em 2em;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 100;
+    margin: 10px;
+}
+
+.page-header{
+    float: right;
+    color: #095407;
+    padding: .3em .1em;
+    margin-bottom: 1em;
+    font-size: 27px;
+    border-bottom: solid #bbbbbb 1px;
+    font-weight: 400;
+}
+
+.nav-item{    
+    border-bottom: solid 1px #0056af0f;
+}
+
+.nav-item:hover{
+    color: #e2f0ff;
+}
+
+.color-white{
+    color: white !important;
+}
+
+.border-white{
+    border-color: #ffffff;
+}
+
+.nav-item .active{
+    background: #095407;
+    color: white;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.sidebar-sticky, .bg-white{
+    background: white;
+    box-shadow: 1px 4px #b3b3b3;
+}
+
+.main{
+    margin-top: 10px;
+    min-height: calc(100vh - 80px);
+}
+
+.main > div{
+    background: #ffffff;
+}
+
+body{
+    background-color: #e6e6e6;
+    background-size: cover;
+    font-size: 14px;
+}
+
+footer {
+    margin-top:10px;    
+    padding: 20px;
+    color: #000000;
+}
+
+.invalid-input{
+    color: #ad0000;
+}
+
+.btn.disabled, .btn:disabled {
+    cursor: not-allowed;
+}

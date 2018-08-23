@@ -1,0 +1,22 @@
+<div class="login bg-theme">
+  <div class="form col-4 offset-4">
+    <img src="assets/images/icon.png" class="col-4 offset-4" />
+    <h2 class="text-center">Login</h2>
+    <br/>
+    <div class="col-10 offset-1">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username">
+        <!-- <small *ngIf="(nUsername.dirty || nUsername.touched) && !username" class="form-text color-white invalid-input ion-android-alert">
+          <span>your username is required</span>
+        </small> -->
+      </div>
+      <div class="form-group">
+        <input type="password"class="form-control" placeholder="Password">
+        <!-- <small *ngIf="(nPassword.dirty || nPassword.touched) && !password" class="form-text color-white invalid-input ion-android-alert">
+          <span>your password is required</span>
+        </small> -->
+      </div>
+      <button (click)="login()" class="btn btn-primary border-white col-4 offset-4">Login</button>
+    </div>
+  </div>
+</div>

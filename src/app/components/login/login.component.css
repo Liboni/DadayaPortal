@@ -1,0 +1,21 @@
+.login{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+.bg-theme, .btn-primary{
+    background: #095407;
+    color: white;
+}
+.login > .form{
+    margin-top: 10%;
+}
+img{
+    border-radius: 2em;
+}
+body{
+    overflow: hidden !important;
+}
