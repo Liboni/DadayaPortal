@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { AlertModule } from './modules/alert/alert.module';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination'; 
 
 import { AppComponent } from './app.component';
 import { AppBoostrapModule } from './modules/app-boostrap/app-boostrap.module';
@@ -17,6 +18,8 @@ import { ConfigService } from './services/config/config.service';
 import { RequestHandlerService } from './services/request-handler.service';
 import { PrincipalMessageComponent } from './components/principal-message/principal-message.component';
 import { JobTitleComponent } from './components/job-title/job-title.component';
+import { FormComponent } from './components/shared/form/form.component';
+import { TableComponent } from './components/shared/table/table.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { JobTitleComponent } from './components/job-title/job-title.component';
     ProjectsComponent,
     LoginComponent,
     PrincipalMessageComponent,
-    JobTitleComponent       
+    JobTitleComponent,
+    FormComponent,
+    TableComponent       
   ],
   imports: [
     BrowserModule,
@@ -37,8 +42,11 @@ import { JobTitleComponent } from './components/job-title/job-title.component';
     AppBoostrapModule,
     AlertModule,
     Ng4LoadingSpinnerModule.forRoot(),
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
+      { path: 'table', component: TableComponent },
+      { path: 'form', component: FormComponent },
       { path: 'staff', component: StaffComponent },
       { path: 'notice', component: NoticesComponent },
       { path: 'job-title', component: JobTitleComponent },

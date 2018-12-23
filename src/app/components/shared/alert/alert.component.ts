@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { AlertService } from '../../services/alert.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-alert',

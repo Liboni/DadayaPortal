@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th *ngFor="let heading of headings" scope="col">{{heading.value}}</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i = index; let detail of details | paginate: { itemsPerPage: 2, currentPage: p }">
+      <th scope="row">{{i+1}}</th>
+      <td *ngFor="let item of data[i].values">
+        <div *ngIf="isUrl(item)">
+          <img style="width: 5em" src={{item}}/>
+        </div>
+        <div *ngIf="!isUrl(item)"> {{item}}</div>
+      </td>
+      <td><button type="button" class="btn btn-primary">View</button></td>
+    </tr>  
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p=$event"></pagination-controls>

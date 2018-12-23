@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .nav-item .active{
-    background: #095407;
+    background: #c6d3c6;
     color: white;
 }
 
@@ -103,3 +103,4 @@ footer {
 .btn.disabled, .btn:disabled {
     cursor: not-allowed;
 }
+
