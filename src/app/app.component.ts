@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItemsService } from './services/menu-items.service';
 
 @Component({
@@ -9,17 +10,22 @@ import { MenuItemsService } from './services/menu-items.service';
 export class AppComponent {
   title = 'app';
   username: string;
-  menuItems: Array<any>;
+  public menuItems: Array<any>;
 
-  constructor() {
-    this.menuItems = MenuItemsService.load();    
+  constructor(private router:Router) {
+    // if(localStorage.getItem("token")==null){
+    //   this.router.navigate(['/login']);  
+    //   return;
+    // }
+    this.menuItems = MenuItemsService.load(); 
   }
 
   getUsername(): string {   
     return 'Liboni';
   }
 
-  clearLocalStorage() {
+  logout() {
     localStorage.clear();
+    //this.router.navigate(['/login']);
   }
 }

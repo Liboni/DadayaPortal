@@ -4,19 +4,17 @@
     <h2 class="text-center">Login</h2>
     <br/>
     <div class="col-10 offset-1">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username">
-        <!-- <small *ngIf="(nUsername.dirty || nUsername.touched) && !username" class="form-text color-white invalid-input ion-android-alert">
-          <span>your username is required</span>
-        </small> -->
-      </div>
-      <div class="form-group">
-        <input type="password"class="form-control" placeholder="Password">
-        <!-- <small *ngIf="(nPassword.dirty || nPassword.touched) && !password" class="form-text color-white invalid-input ion-android-alert">
-          <span>your password is required</span>
-        </small> -->
-      </div>
-      <button (click)="login()" class="btn btn-primary border-white col-4 offset-4">Login</button>
+      <form #form="ngForm" (ngSubmit)="login()" class="form-group">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Username" required [(ngModel)]="form.email" #email="ngModel" id="email"
+            name="email">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Password" required [(ngModel)]="form.password" #Password="ngModel"
+            id="password" name="password">
+        </div>
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary border-white col-4 offset-4">Login</button>
+      </form>
     </div>
   </div>
 </div>
