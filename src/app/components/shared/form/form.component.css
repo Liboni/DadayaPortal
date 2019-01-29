@@ -3,3 +3,38 @@ form{
     border-radius: 1em;
     padding: 1em;
 }
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width:100%;
+  }
+  
+  img:hover {
+    box-shadow: 0 0 2px 1px  rgb(9, 84, 7)
+  }
+  .container {
+    position: relative;   
+    margin: 0 auto;
+  }
+  
+  .container img {vertical-align: middle;}
+  
+  .container .content {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0); 
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+  }
+  .heading{
+    text-align:center;
+    border-bottom: 1px solid #eee;
+  }
+
+ 

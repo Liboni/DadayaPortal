@@ -1,3 +1,4 @@
 export enum BaseUrlType {
-    Main
+    Main,
+    File
 }

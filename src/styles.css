@@ -1,1 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-primary{
+    background-color: #095407;
+    border: solid #095407;
+}
+.btn-primary:hover{
+    border: solid #084a06;  
+    background-color: #084a06 ;
+}
+
+.btn-primary:focus{
+    border: solid #226520;  
+    box-shadow: 0 0 0 0.2rem rgb(34, 101, 32,.5)
+}
+
+.btn-primary:active{
+    background-color: #084a06 !important;
+    border: solid #226520 !important;  
+    box-shadow: 0 0 0 0.2rem rgb(9, 84, 7,.5)
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus{
+    background-color: #084a06 !important;
+    border: solid #226520 !important;  
+    box-shadow: 0 0 0 0.2rem rgb(9, 84, 7,.5)
+}
+
+.primary-color{
+    color:  #095407 !important;
+}
+.edit-color{
+    color:  #FF8C00 !important;
+}
+.edit-color:hover{
+    color:  #FFA500 !important;
+}
+.edit-color:active{
+    color:  #FFA500 !important;
+}
+.edit-color:focus{
+    color:  #FFA500 !important;
+}
+.edit-color::not(:disabled):not(.disabled):active:focus{
+    color:  #FFA500 !important;
+}
+
+.danger-color{
+    color:  #8B0000 !important;
+}
+
+.danger-color:hover{
+    color:  #FF0000 !important;
+}
+
+.primary-color:hover{
+    color:  #226520 !important;  
+}
+.primary-color:focus{
+    color:  #226520 !important;  
+}
+
+.primary-color:active{
+    color:  #226520 !important; 
+}
+
+.primary-color::not(:disabled):not(.disabled):active:focus{
+    color:  #226520 !important;
+}
+
+a{
+    cursor: pointer !important;
+}
+
+.center {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.hide{
+    display: none;
+}

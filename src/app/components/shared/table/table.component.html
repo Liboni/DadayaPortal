@@ -2,21 +2,36 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th *ngFor="let heading of headings" scope="col">{{heading.value}}</th>
+      <th *ngFor="let k = index; let heading of headings" scope="col">
+        <div *ngIf="!small">
+          {{heading.value}}
+        </div>
+        <div *ngIf="small && k<3">
+          {{heading.value}}
+        </div>
+      </th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let i = index; let detail of details | paginate: { itemsPerPage: 2, currentPage: p }">
       <th scope="row">{{i+1}}</th>
-      <td *ngFor="let item of data[i].values">
-        <div *ngIf="isUrl(item)">
-          <img style="width: 5em" src={{item}}/>
+      <td *ngFor="let j = index; let item of data[i].values ">
+        <div *ngIf="!small">
+          <div *ngIf="isUrl(item)">
+            <img style="width: 5em" src={{item}} />
+          </div>
+          <div *ngIf="!isUrl(item)"> {{item}}</div>
         </div>
-        <div *ngIf="!isUrl(item)"> {{item}}</div>
+        <div *ngIf="small && j<3">
+          <div *ngIf="isUrl(item)">
+            <img style="width: 5em" src={{item}} />
+          </div>
+          <div *ngIf="!isUrl(item)"> {{item}}</div>
+        </div>
       </td>
-      <td><button type="button" class="btn btn-primary">View</button></td>
-    </tr>  
+      <td><a><span (click)="edit(detail)" class="edit-color fa fa-2x fa-edit"></span></a></td>
+    </tr>
   </tbody>
 </table>
 <pagination-controls (pageChange)="p=$event"></pagination-controls>

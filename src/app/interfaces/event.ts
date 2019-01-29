@@ -3,7 +3,7 @@ export interface Event {
     ImageLocation:String,
     Message:String,   
     From:Date,
-    To:Date,
-    IsDeleted:Boolean,   
-    DateCreated:Date
+    To:Date,   
+    DateCreated:Date,
+    Deleted:Boolean 
 }

@@ -1,22 +1,14 @@
-<!-- <div class="form col-4 offset-4">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title center ">Add Event</h5>
-      <form #EventForm="ngForm" novalidate (ngSubmit)="onSubmit(EventForm)">
-        <div class="form-group">
-          <label for="heading">Heading</label>
-          <input type="text" class="form-control" name="heading" [(ngModel)]="event.heading" required #heading="ngModel">
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea class="form-control" name="description" [(ngModel)]="event.description"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="image">Image</label>
-          <input type="file" class="form-control" name="image" [(ngModel)]="event.image" #image="ngModel">
-        </div>
-        <button type="submit" class="btn btn-primary float-right" [disabled]="!EventForm.valid">Submit</button>
-      </form>
+<h2 class="center">Events</h2>
+<div class="row">
+  <div class="col-12">
+    <a><span (click)="add()" class="primary-color fa fa-3x fa-plus-square"></span></a>
+  </div>
+  <div class="row form-group">
+    <div [class.col-12]="!mini" [class.col-6]="mini" >
+      <app-table [input]="list" (mini)="toggle($event)" [toggle]="mini" (result)="editData($event)"></app-table>
+    </div>
+    <div [class.hide]="!mini" [class.col-6]="mini" >
+      <app-form [input]="item" (result)="editData($event)" (mini)="toggle($event)"></app-form>
     </div>
   </div>
-</div> -->
+</div>

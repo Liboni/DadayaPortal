@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UrlPreffix } from '../../enums/url-preffix.enum';
 import { BaseUrlType } from '../../enums/base-url-type.enum';
 
 @Injectable()
@@ -13,7 +12,9 @@ export class ConfigService {
   public baseUrl(key:BaseUrlType) {    
     switch (key) {
       case BaseUrlType.Main:
-        return "http://192.168.10.229:8020/";     
+        return "http://localhost:52337/";     
+        case BaseUrlType.File:
+        return "http://192.168.10.231:1020/";     
       default:
         return "";
     }
