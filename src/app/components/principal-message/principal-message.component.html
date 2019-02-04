@@ -1,3 +1,14 @@
-<p>
-  principal-message works!
-</p>
+<h2 class="center">Principal Messages</h2>
+<div class="max row">
+  <div class="col-12">
+    <a><span (click)="add()" class="primary-color fa fa-3x fa-plus-square"></span></a>
+  </div>
+  <div class="row max">
+    <div [class.col-12]="!mini" [class.col-6]="mini" >
+      <app-table [input]="list" (mini)="toggle($event)" [mapper]="map" [toggle]="mini" (result)="edit($event)"></app-table>
+    </div>
+    <div [class.hide]="!mini" [class.col-6]="mini" >
+      <app-form [input]="item" [actionType]="action" [mapper]="map" (result)="submit($event)" (mini)="toggle($event)"></app-form>
+    </div>
+  </div>
+</div>

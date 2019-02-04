@@ -80,3 +80,30 @@ a{
 .hide{
     display: none;
 }
+ .pagination li{
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #095407;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+ }
+ .pagination li.active{
+    z-index: 1;
+    color: #fff;
+    background-color: #226520;
+    border-color: #226520;
+ }
+ .pagination li.disabled{
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+ }
+
+ .max{
+     width: 100% !important;
+ }

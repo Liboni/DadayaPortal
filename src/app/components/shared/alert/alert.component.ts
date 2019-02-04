@@ -44,7 +44,7 @@ export class AlertComponent implements OnInit {
         this.backColor = "#117a8b";
       }
       if (this.type == "success") {
-        this.backColor = "#28a745";
+        this.backColor = "#095407";
       }
       this.modalStatus = true;
 

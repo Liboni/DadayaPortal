@@ -6,12 +6,12 @@
     <div class="col-10 offset-1">
       <form #form="ngForm" (ngSubmit)="login()" class="form-group">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Username" required [(ngModel)]="form.email" #email="ngModel" id="email"
-            name="email">
+          <input type="text" class="form-control" placeholder="Username" required [(ngModel)]="form.Username" #Username="ngModel" id="Username"
+            name="Username">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" placeholder="Password" required [(ngModel)]="form.password" #Password="ngModel"
-            id="password" name="password">
+          <input type="password" class="form-control" placeholder="Password" required [(ngModel)]="form.Password" #Password="ngModel"
+            id="Password" name="Password">
         </div>
         <button type="submit" [disabled]="!form.valid" class="btn btn-primary border-white col-4 offset-4">Login</button>
       </form>

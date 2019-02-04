@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { PaginationService } from '../../../services/pagination.service';
 
 @Component({
   selector: 'app-table',
@@ -6,46 +7,46 @@ import { Component, Output, EventEmitter, Input, OnChanges } from '@angular/core
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnChanges {
-  details: any[]=[];
-  headings:any[]=[{property:String,value:String}]
-  data:any[]=[{values:[]}]
+  headings: any[] = []
+  @Input() mapper: any;
   @Output() result = new EventEmitter<any>();
-  @Input() input : any;
-  @Input() toggle : boolean;
+  @Input() input: any;
+  @Input() toggle: boolean;
   @Output() mini = new EventEmitter<boolean>();
-  small:boolean
-  constructor() { }
+  small: boolean;
+  // pager object
+  pager: any = {};
 
-  ngOnChanges() { 
-    this.small =this.toggle; 
-    this.details = this.input;
-    console.log(this.input);
-    
-    this.headings= [];
-    this.data=[];
-    for (var key in this.details) {      
-      if (!this.details.hasOwnProperty(key)) continue;
-      var obj = this.details[key];
-      let info=[]
-      this.headings=[];
-      for (var prop in obj) {
-        if (!obj.hasOwnProperty(prop)) continue;        
-        if(prop=="id" || prop=="Id")continue
-        info.push(obj[prop])
-        this.headings.push({value:prop.replace(/([a-z0-9])([A-Z])/g, '$1 $2'), property: prop})
+  // paged items
+  pagedItems: any[];
+  constructor(private pagination: PaginationService) { }
+
+  ngOnChanges() {
+    this.small = this.toggle;
+    for (var key in this.input) {
+      if (!this.input.hasOwnProperty(key)) continue;
+      this.headings = [];
+      for (var prop in this.mapper) {
+        if (!this.mapper.hasOwnProperty(prop)) continue;
+        this.headings.push({ value: this.mapper[prop].display, key: prop, visible: this.mapper[prop].visible, type: this.mapper[prop].type , source: this.mapper[prop].source });
       }
-      this.data.push({values:info});
-    }            
+      break;
+    }    
+    this.setPage(1);
   }
 
-  isUrl(url) {
-    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    return regexp.test(url);
- }
-  
-  edit(data){
-   this.small=true;
-   this.result.emit(data);
-   this.mini.emit(true);
+  setPage(page: number) {
+    // get pager object from service
+    this.pager = this.pagination.getPager(this.input.length, page);
+
+    // get current page of items
+    this.pagedItems = this.input.slice(this.pager.startIndex, this.pager.endIndex + 1);
+
+  }
+
+  edit(data) {
+    this.small = true;
+    this.result.emit(data);
+    this.mini.emit(true);
   }
 }

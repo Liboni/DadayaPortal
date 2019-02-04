@@ -1,27 +1,40 @@
-<form #data="ngForm" (ngSubmit)="onSubmit(data)"  #form="ngForm">
+<form #data="ngForm" #form="ngForm">
   <a><span class="danger-color fa fa-times float-right" (click)="close()"></span></a>
    <div class="form-group" *ngFor="let item of formBody">
-    <label *ngIf="!isUrl(item.value) && item.type!=='checkbox' && item.key !=='id'" for={{item.key}}>{{item.key}}</label>
-    <div class="row" *ngIf="isUrl(item.value)">
+    <label *ngIf="item.type!=='image' && item.type!=='checkbox' && item.visible" for={{item.id}}>{{item.display}}</label>
+    <div class="row" *ngIf="item.type==='image'">
       <div class="col-12 container">
-        <img *ngIf="pic.length>0" style="width: 100%" src={{pic}} />
-        <button (click)="filesInput.click()" class="btn btn-md btn-primary offset-3">Upload Picture</button>
-        <input #filesInput name="{{item.prop}}" [(ngModel)]="pic" type="file" style="display:none" accept="image/*" (change)="previewImage($event)">
+        <img *ngIf="pic.length>1" style="width: 100%; height: 200px;" [src]="pic" />
+        <img *ngIf="pic.length<=1" style="width: 100%; height: 200px;" src="/assets/images/No_Image_Available.png" />
+        <button (click)="filesInput.click()" class="btn btn-md btn-primary offset-4">Upload Picture</button>
+        <input #filesInput  type="file" style="display:none" accept="image/*" (change)="previewImage($event)">
+        <input name="{{item.id}}" [(ngModel)]="pic" type="text" style="display:none" accept="image/*" >
       </div>
     </div>
-    <div *ngIf="!isUrl(item.value)">
-        <div  [class.hide]="item.key ==='id'" *ngIf="item.type!=='checkbox'">
-            <input [(ngModel)]="item.value" name="{{item.prop}}" type="{{item.type}}" class="form-control" placeholder={{item.key}}/>
-        </div>    
-      <div *ngIf="item.type==='checkbox'" class="form-check">
-          <input ngModel [(ngModel)]="item.value" name="{{item.prop}}" type="checkbox" class="form-check-input"/>
-          <label class="form-check-label" for="{{item.key}}">{{item.key}}</label>
+    <div *ngIf="item.type!=='image'">
+      <div [class.hide]="!item.visible" *ngIf="item.type ==='number' || item.type ==='text' || item.type ==='date'">
+            <input [(ngModel)]="item.value" name="{{item.id}}" type="{{item.type}}" class="form-control" placeholder={{item.display}}/>
+      </div> 
+      <div [class.hide]="!item.visible" *ngIf="item.type ==='select'">
+        <select  name="{{item.id}}" class="form-control" [(ngModel)]="item.value">
+          <option value="0">Select {{item.display}}</option>
+          <option *ngFor="let option of item.source" value="{{option.id}}">{{option.name}}</option>
+        </select>
+       </div>    
+      <div [class.hide]="!item.visible" *ngIf="item.type ==='textarea'">
+        <textarea [(ngModel)]="item.value" name="{{item.id}}" class="form-control"
+         placeholder={{item.display}}>{{item.value}}</textarea>
+       
+     </div>    
+      <div *ngIf="item.type ==='checkbox'" class="form-check">
+          <input [(ngModel)]="item.value" name="{{item.id}}" type="checkbox" class="form-check-input"/>
+          <label class="form-check-label" for="{{item.id}}">{{item.display}}</label>
         </div>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <button type="submit" class="btn btn-primary center">Submit</button>
+      <button type="submit" (click)="onSubmit(data)" class="btn btn-primary center">Submit</button>
     </div>
   </div>
 </form>

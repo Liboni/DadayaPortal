@@ -8,4 +8,5 @@ export let UrlPreffix ={
     Projects : {variable:'api/Projects',key:BaseUrlType.Main},
     Staffs : {variable:'api/Staffs',key:BaseUrlType.Main},
     File : {variable:'api/File',key:BaseUrlType.File},
+    Login : {variable:'api/login',key:BaseUrlType.Main}
 }

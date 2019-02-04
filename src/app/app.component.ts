@@ -13,19 +13,19 @@ export class AppComponent {
   public menuItems: Array<any>;
 
   constructor(private router:Router) {
-    // if(localStorage.getItem("token")==null){
-    //   this.router.navigate(['/login']);  
-    //   return;
-    // }
+    if(localStorage.getItem("token")==null){
+      this.router.navigate(['/login']);  
+      return;
+    }
     this.menuItems = MenuItemsService.load(); 
   }
 
   getUsername(): string {   
-    return 'Liboni';
+    return 'Admin';
   }
 
   logout() {
     localStorage.clear();
-    //this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 }

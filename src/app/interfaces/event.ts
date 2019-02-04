@@ -1,9 +1,10 @@
-export interface Event {
-    Id:Number,   
-    ImageLocation:String,
-    Message:String,   
-    From:Date,
-    To:Date,   
-    DateCreated:Date,
-    Deleted:Boolean 
+export class Event {
+    id : Number
+    imageLocation : String
+    heading :String 
+    message :String
+    from : Date
+    to : Date 
+    dateCreated : Date 
+    isDeleted :Date
 }

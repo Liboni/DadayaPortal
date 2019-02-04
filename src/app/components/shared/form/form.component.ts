@@ -3,6 +3,8 @@ import { RequestHandlerService } from '../../../services/request-handler.service
 import { UrlPreffix } from '../../../enums/url-preffix.enum';
 import { AlertService } from '../../../services/alert.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { ActionType } from '../../../enums/action-type.enum';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -12,46 +14,35 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class FormComponent implements OnChanges {
   @Output() result = new EventEmitter<any>();
   @Input() input : any;
+  @Input() mapper : any;
+  @Input() actionType : ActionType;
+
   @Output() mini= new EventEmitter<boolean>();
   myform: any = {};
   formBody: any[];
-  pic: String = "";
-  title: string = "Save"
-  constructor(private spinnerService: Ng4LoadingSpinnerService, private request: RequestHandlerService, private alert: AlertService) { }
+  pic: String ;
+  date:any;
+  constructor(public datepipe: DatePipe,private spinnerService: Ng4LoadingSpinnerService, private request: RequestHandlerService, private alert: AlertService) { }
 
   ngOnChanges() {
     this.formBody = [];
     for (var prop in this.input) {
       if (!this.input.hasOwnProperty(prop)) continue;
-      let type = "";
-      switch (typeof this.input[prop]) {
-        case "string":
-          type = "text";
-          break;
-        case "number":
-          type = typeof this.input[prop];
-          break;
-        case "boolean":
-          type = "checkbox";
-          break;
-        case "object":
-          type = "date";
-          break;
-        default:
-          break;
-      }
-      if (this.isUrl(this.input[prop])) this.pic = this.input[prop];
-      this.formBody.push({ key: prop.replace(/([a-z0-9])([A-Z])/g, '$1 $2'), value: this.input[prop], type: type, prop: prop });
-    }    
+      if(this.mapper[prop].type===null)continue; 
+      let value =  this.input[prop];
+      let source =this.mapper[prop].source  
+       if (this.mapper[prop].type==='image') this.pic = this.input[prop];
+       if (this.input[prop] !== "" && this.mapper[prop].type==='date' ) 
+         value =this.datepipe.transform(new Date(this.input[prop]), 'yyyy-MM-dd'); 
+      this.formBody.push({ visible:this.mapper[prop].visible , id: prop, value: value ,type: this.mapper[prop].type, display: this.mapper[prop].display, source: source, pattern:this.mapper[prop].regex});
+    }     
   }
 
   onSubmit(data) {
-    this.result.emit(data.value);
-  }
-
-  isUrl(url) {
-    var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    return regexp.test(url);
+    this.result.emit({
+      data:data.value,
+      actionType:this.actionType
+    });
   }
 
   close(){
@@ -78,4 +69,6 @@ export class FormComponent implements OnChanges {
       });
     }
   }
+
+
 }

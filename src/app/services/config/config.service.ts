@@ -25,7 +25,7 @@ export class ConfigService {
     return Observable.throw(error);
   }
 
-  public GetOptions() {
+  public GetOptions() {     
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

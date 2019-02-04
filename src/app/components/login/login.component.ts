@@ -21,15 +21,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.spinnerService.show();
-    // this.requestHandler.post(JSON.stringify(this.form.value),UrlPreffix.login).subscribe((results) => {
-    //   this.spinnerService.hide();
-    //   localStorage.setItem('token', results.access_token);
-    //   this.router.navigate(['']);      
-    //   this.app.menuItems = MenuItemsService.load(); 
-    // }, error => {
-    //   this.spinnerService.hide();
-    //   this.errorHandling(error);
-    // });
+    this.requestHandler.post(JSON.stringify(this.form.value),UrlPreffix.Login).subscribe((results) => {
+      this.spinnerService.hide();
+      localStorage.setItem('token', results.access_token);
+      this.router.navigate(['/dashboard']);      
+      this.app.menuItems = MenuItemsService.load(); 
+    }, error => {
+      this.spinnerService.hide();
+      this.errorHandling(error);
+    });
   }
 
   errorHandling(error) {

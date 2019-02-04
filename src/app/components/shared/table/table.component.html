@@ -2,36 +2,71 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th *ngFor="let k = index; let heading of headings" scope="col">
-        <div *ngIf="!small">
+      <ng-container *ngFor="let k = index; let heading of headings">
+        <th *ngIf="!small && heading.visible" scope="col">
           {{heading.value}}
-        </div>
-        <div *ngIf="small && k<3">
+        </th>
+        <th *ngIf="small && k<4 && heading.visible" scope="col">
           {{heading.value}}
-        </div>
-      </th>
+        </th>
+      </ng-container>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let i = index; let detail of details | paginate: { itemsPerPage: 2, currentPage: p }">
+    <tr *ngFor="let i = index; let info of pagedItems">
       <th scope="row">{{i+1}}</th>
-      <td *ngFor="let j = index; let item of data[i].values ">
-        <div *ngIf="!small">
-          <div *ngIf="isUrl(item)">
-            <img style="width: 5em" src={{item}} />
+      <ng-container *ngFor="let j = index; let heading of headings">
+        <td *ngIf="!small && heading.visible">
+          <div *ngIf="heading.type=='image'">
+            <img style="width: 5em" src={{info[heading.key]}} />
           </div>
-          <div *ngIf="!isUrl(item)"> {{item}}</div>
-        </div>
-        <div *ngIf="small && j<3">
-          <div *ngIf="isUrl(item)">
-            <img style="width: 5em" src={{item}} />
+          <div *ngIf="heading.type ==='text' || heading.type ==='textarea' || heading.type ==='date' || heading.type ==='number'">
+            {{info[heading.key]}}</div>
+          <div *ngIf="heading.type ==='select'">
+            <div *ngFor="let option of heading.source">
+              <div *ngIf="option.id===info[heading.key]">
+                {{option.name}}
+              </div>
+            </div>
           </div>
-          <div *ngIf="!isUrl(item)"> {{item}}</div>
-        </div>
-      </td>
-      <td><a><span (click)="edit(detail)" class="edit-color fa fa-2x fa-edit"></span></a></td>
+          <div *ngIf="heading.type ==='checkbox'">
+            <span *ngIf="!info[heading.key]" class="danger-color fa fa-times"></span>
+            <span *ngIf="info[heading.key]" class="primary-color fa fa-check"></span>
+          </div>
+        </td>
+        <td *ngIf="small && j<4 && heading.visible">
+          <div *ngIf="heading.type=='image'">
+            <img style="width: 5em" src={{info[heading.key]}} />
+          </div>
+          <div *ngIf="heading.type ==='text' || heading.type ==='textarea' || heading.type ==='checkbox' || heading.type ==='date' || heading.type ==='number'">
+            {{info[heading.key]}}</div>
+          <div *ngIf="heading.type ==='select'">
+            <div *ngFor="let option of heading.source">
+              <div *ngIf="option.id===info[heading.key]">
+                {{option.name}}
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <td><a><span (click)="edit(info)" class="edit-color fa fa-2x fa-edit"></span></a></td>
     </tr>
   </tbody>
 </table>
-<pagination-controls (pageChange)="p=$event"></pagination-controls>
+<!-- pager -->
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+  <li [class.disabled]="pager.currentPage === 1">
+    <a (click)="setPage(1)">
+      << First</a> </li> <li [class.disabled]="pager.currentPage === 1">
+        <a (click)="setPage(pager.currentPage - 1)">
+          < Previous</a> </li> <li *ngFor="let page of pager.pages" [class.active]="pager.currentPage === page">
+            <a (click)="setPage(page)">{{page}}</a>
+  </li>
+  <li [class.disabled]="pager.currentPage === pager.totalPages">
+    <a (click)="setPage(pager.currentPage + 1)">Next ></a>
+  </li>
+  <li [class.disabled]="pager.currentPage === pager.totalPages">
+    <a (click)="setPage(pager.totalPages)">Last >></a>
+  </li>
+</ul>

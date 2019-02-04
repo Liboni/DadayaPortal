@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { AlertModule } from './modules/alert/alert.module';
 import { FormsModule } from '@angular/forms';
-import { NgxPaginationModule } from 'ngx-pagination'; 
 
 import { AppComponent } from './app.component';
 import { AppBoostrapModule } from './modules/app-boostrap/app-boostrap.module';
@@ -20,6 +19,9 @@ import { PrincipalMessageComponent } from './components/principal-message/princi
 import { JobTitleComponent } from './components/job-title/job-title.component';
 import { FormComponent } from './components/shared/form/form.component';
 import { TableComponent } from './components/shared/table/table.component';
+import { PaginationService } from './services/pagination.service';
+import { DatePipe } from '@angular/common';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { TableComponent } from './components/shared/table/table.component';
     PrincipalMessageComponent,
     JobTitleComponent,
     FormComponent,
-    TableComponent       
+    TableComponent,
+    DashboardComponent    
   ],
   imports: [
     BrowserModule,
@@ -42,19 +45,20 @@ import { TableComponent } from './components/shared/table/table.component';
     AppBoostrapModule,
     AlertModule,
     Ng4LoadingSpinnerModule.forRoot(),
-    NgxPaginationModule,
     RouterModule.forRoot([
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'login', component: LoginComponent },
       { path: 'table', component: TableComponent },
       { path: 'form', component: FormComponent },
       { path: 'staff', component: StaffComponent },
       { path: 'notice', component: NoticesComponent },
+      { path: 'projects', component: ProjectsComponent },
       { path: 'job-title', component: JobTitleComponent },
       { path: 'events', component: EventsComponent },
       { path: 'principal-message', component: PrincipalMessageComponent },
     ])
   ],
-  providers: [ConfigService,RequestHandlerService],
+  providers: [ConfigService,RequestHandlerService,PaginationService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
