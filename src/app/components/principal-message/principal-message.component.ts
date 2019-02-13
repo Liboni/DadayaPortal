@@ -1,7 +1,6 @@
 import { Component, OnChanges, Output, EventEmitter } from '@angular/core';
 import { PrincipalMessageMapper } from '../../models/principal-message-mapper';
 import { ActionType } from '../../enums/action-type.enum';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { RequestHandlerService } from '../../services/request-handler.service';
 import { AlertService } from '../../services/alert.service';
 import { UrlPreffix } from '../../enums/url-preffix.enum';
@@ -19,10 +18,10 @@ export class PrincipalMessageComponent implements OnChanges {
   map = PrincipalMessageMapper;
   action: ActionType;
   @Output() data = new EventEmitter<any>();
-  constructor(private router: Router,private spinnerService: Ng4LoadingSpinnerService, private request: RequestHandlerService, private alert: AlertService) {
-    this.spinnerService.show();
+  constructor(private router: Router, private request: RequestHandlerService, private alert: AlertService) {
+    //this.spinnerService.show();
     this.request.getAll(UrlPreffix.PrincipalMessage).subscribe(result => {
-      this.spinnerService.hide();
+      //this.spinnerService.hide();
       this.list = result;
     });
   }
@@ -41,16 +40,16 @@ export class PrincipalMessageComponent implements OnChanges {
   submit(data) {
     switch (data.actionType) {
       case ActionType.edit:
-        this.spinnerService.show();
+        //this.spinnerService.show();
         this.request.put(data.data.id, data.data, UrlPreffix.PrincipalMessage).subscribe(result => {
-          this.spinnerService.hide();
+          //this.spinnerService.hide();
           let updateItem = this.list.find(this.findIndexToUpdate, result.id);
           let index = this.list.indexOf(updateItem);
           this.list[index] = result;
           this.alert.create("Success", "success", 5000, "Principal message updated successfully.");
           this.mini = false;
         }, error => {
-          this.spinnerService.hide();
+          //this.spinnerService.hide();
           if (error.status == 401) {
             localStorage.removeItem("token");            
             this.alert.create(
@@ -67,14 +66,14 @@ export class PrincipalMessageComponent implements OnChanges {
         break;
 
       case ActionType.add:
-        this.spinnerService.show();
+        //this.spinnerService.show();
         this.request.post(data.data, UrlPreffix.PrincipalMessage).subscribe(result => {
-          this.spinnerService.hide();
+          //this.spinnerService.hide();
           this.list.push(result);
           this.alert.create("Success", "success", 5000, "Principal message saved successfully.");
           this.mini = false;
         }, error => {
-          this.spinnerService.hide();
+          //this.spinnerService.hide();
           if (error.status == 401) {
             localStorage.removeItem("token");            
             this.alert.create(

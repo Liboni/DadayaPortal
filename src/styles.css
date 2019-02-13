@@ -58,6 +58,11 @@
 .primary-color:focus{
     color:  #226520 !important;  
 }
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #658c64;
+    border-color: #658c64;
+}
 
 .primary-color:active{
     color:  #226520 !important; 
@@ -106,4 +111,7 @@ a{
 
  .max{
      width: 100% !important;
+ }
+ .danger{
+     color: red;
  }

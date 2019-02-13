@@ -8,12 +8,12 @@ export class MenuItemsService {
 
   public static menuitems: Array<MenuItemsService> =
     [
-      {
-        name: null,
-        items: [
-          { name: 'Dashboard', icon: 'ion-ios-pulse', router: '/dashboard', permission: Permission.None }
-        ]
-      },
+      // {
+      //   name: null,
+      //   items: [
+      //     { name: 'Dashboard', icon: 'ion-ios-pulse', router: '/dashboard', permission: Permission.None }
+      //   ]
+      // },
       {
         name: 'User Management',
         items: [

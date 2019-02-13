@@ -6,5 +6,7 @@ export class Mapper {
     visible:Boolean;
     display:String;
     source:any;
-    regex:String
+    regex:String;
+    required:Boolean;
+    errorMessage:String;
 }

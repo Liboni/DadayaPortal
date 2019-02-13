@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestHandlerService } from '../../services/request-handler.service';
 import { AlertService } from '../../services/alert.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AppComponent } from '../../app.component';
 import { MenuItemsService } from '../../services/menu-items.service';
 import { UrlPreffix } from '../../enums/url-preffix.enum';
@@ -14,20 +13,20 @@ import { UrlPreffix } from '../../enums/url-preffix.enum';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('form') form;
-  constructor(private app:AppComponent,private spinnerService: Ng4LoadingSpinnerService, private alertService: AlertService, private router: Router, private requestHandler: RequestHandlerService) { }
+  constructor(private app:AppComponent, private alertService: AlertService, private router: Router, private requestHandler: RequestHandlerService) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.spinnerService.show();
+    //this.spinnerService.show();
     this.requestHandler.post(JSON.stringify(this.form.value),UrlPreffix.Login).subscribe((results) => {
-      this.spinnerService.hide();
+      //this.spinnerService.hide();
       localStorage.setItem('token', results.access_token);
-      this.router.navigate(['/dashboard']);      
+      this.router.navigate(['/']);      
       this.app.menuItems = MenuItemsService.load(); 
     }, error => {
-      this.spinnerService.hide();
+      //this.spinnerService.hide();
       this.errorHandling(error);
     });
   }

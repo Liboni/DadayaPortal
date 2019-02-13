@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { AlertModule } from './modules/alert/alert.module';
 import { FormsModule } from '@angular/forms';
 
@@ -44,9 +43,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     AppBoostrapModule,
     AlertModule,
-    Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot([
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent },
       { path: 'login', component: LoginComponent },
       { path: 'table', component: TableComponent },
       { path: 'form', component: FormComponent },
