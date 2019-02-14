@@ -21,6 +21,7 @@ import { TableComponent } from './components/shared/table/table.component';
 import { PaginationService } from './services/pagination.service';
 import { DatePipe } from '@angular/common';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoaderModule } from './modules/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     JobTitleComponent,
     FormComponent,
     TableComponent,
-    DashboardComponent    
+    DashboardComponent         
   ],
   imports: [
     BrowserModule,
@@ -43,11 +44,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     AppBoostrapModule,
     AlertModule,
+    LoaderModule,
     RouterModule.forRoot([
       { path: '', component: DashboardComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'table', component: TableComponent },
-      { path: 'form', component: FormComponent },
       { path: 'staff', component: StaffComponent },
       { path: 'notice', component: NoticesComponent },
       { path: 'projects', component: ProjectsComponent },

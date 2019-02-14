@@ -5,6 +5,7 @@ import { RequestHandlerService } from '../../services/request-handler.service';
 import { AlertService } from '../../services/alert.service';
 import { UrlPreffix } from '../../enums/url-preffix.enum';
 import { Router } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-projects',
@@ -18,10 +19,10 @@ export class ProjectsComponent implements OnChanges {
   map = ProjectMapper;
   action: ActionType;
   @Output() data = new EventEmitter<any>();
-  constructor(private router: Router, private request: RequestHandlerService, private alert: AlertService) {
-    // this.spinnerService.show();
+  constructor(private router: Router, private request: RequestHandlerService, private alert: AlertService,private loader:LoaderService) {
+    this.loader.show();
     this.request.getAll(UrlPreffix.Projects).subscribe(result => {
-      // this.spinnerService.hide();
+      this.loader.hide();
       this.list = result;
     });
   }
@@ -40,16 +41,16 @@ export class ProjectsComponent implements OnChanges {
   submit(data) {
     switch (data.actionType) {
       case ActionType.edit:
-        // this.spinnerService.show();
+        this.loader.show();
         this.request.put(data.data.id, data.data, UrlPreffix.Projects).subscribe(result => {
-          // this.spinnerService.hide();
+          this.loader.hide();
           let updateItem = this.list.find(this.findIndexToUpdate, result.id);
           let index = this.list.indexOf(updateItem);
           this.list[index] = result;
           this.alert.create("Success", "success", 5000, "Project updated successfully.");
           this.mini = false;
         }, error => {
-          //this.spinnerService.hide();
+          this.loader.hide();
           if (error.status == 401) {
             localStorage.removeItem("token");            
             this.alert.create(
@@ -66,14 +67,14 @@ export class ProjectsComponent implements OnChanges {
         break;
 
       case ActionType.add:
-        //this.spinnerService.show();
+        this.loader.show();
         this.request.post(data.data, UrlPreffix.Projects).subscribe(result => {
-          //this.spinnerService.hide();
+          this.loader.hide();
           this.list.unshift(result);
           this.alert.create("Success", "success", 5000, "Project saved successfully.");
           this.mini = false;
         }, error => {
-          //this.spinnerService.hide();
+          this.loader.hide();
           if (error.status == 401) {
             localStorage.removeItem("token");            
             this.alert.create(

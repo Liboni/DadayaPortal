@@ -5,6 +5,7 @@ import { AlertService } from '../../services/alert.service';
 import { AppComponent } from '../../app.component';
 import { MenuItemsService } from '../../services/menu-items.service';
 import { UrlPreffix } from '../../enums/url-preffix.enum';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -13,20 +14,21 @@ import { UrlPreffix } from '../../enums/url-preffix.enum';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('form') form;
-  constructor(private app:AppComponent, private alertService: AlertService, private router: Router, private requestHandler: RequestHandlerService) { }
+  constructor(private app:AppComponent, private alertService: AlertService, private router: Router, private requestHandler: RequestHandlerService,private loader:LoaderService) { }
 
   ngOnInit() {
   }
 
   login() {
-    //this.spinnerService.show();
+    this.loader.show();
     this.requestHandler.post(JSON.stringify(this.form.value),UrlPreffix.Login).subscribe((results) => {
-      //this.spinnerService.hide();
+      this.loader.hide();
       localStorage.setItem('token', results.access_token);
+      localStorage.setItem('username', this.form.value.Username);
       this.router.navigate(['/']);      
       this.app.menuItems = MenuItemsService.load(); 
     }, error => {
-      //this.spinnerService.hide();
+      this.loader.hide();
       this.errorHandling(error);
     });
   }
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
   errorHandling(error) {
     if (error.status == 401) {
       localStorage.removeItem("token");
+      localStorage.removeItem("username");
       this.alertService.create(
         "Login",
         "danger",

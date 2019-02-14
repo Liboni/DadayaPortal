@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   getUsername(): string {   
-    return 'Admin';
+    return localStorage.getItem("username");
   }
 
   logout() {

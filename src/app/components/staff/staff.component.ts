@@ -5,6 +5,7 @@ import { AlertService } from '../../services/alert.service';
 import { UrlPreffix } from '../../enums/url-preffix.enum';
 import { StaffMapper } from '../../models/staff-mapper';
 import { Router } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-staff',
@@ -18,10 +19,10 @@ export class StaffComponent implements OnChanges {
   map = StaffMapper;
   action: ActionType;
   @Output() data = new EventEmitter<any>();
-  constructor(private router: Router, private request: RequestHandlerService, private alert: AlertService) {
-    // this.spinnerService.show();
+  constructor(private router: Router, private request: RequestHandlerService, private alert: AlertService,private loader:LoaderService) {
+    this.loader.show();
     this.request.getAll(UrlPreffix.Staffs).subscribe(result => {
-      // this.spinnerService.hide();
+      this.loader.hide();
       this.request.getAll(UrlPreffix.JobTitles).subscribe(source => {
       this.list = result;
       this.map.jobTitleId.source = source;     
@@ -43,16 +44,16 @@ export class StaffComponent implements OnChanges {
   submit(data) {
     switch (data.actionType) {
       case ActionType.edit:
-        // this.spinnerService.show();
+        this.loader.show();
         this.request.put(data.data.id, data.data, UrlPreffix.Staffs).subscribe(result => {
-          // this.spinnerService.hide();
+          this.loader.hide();
           let updateItem = this.list.find(this.findIndexToUpdate, result.id);
           let index = this.list.indexOf(updateItem);
           this.list[index] = result;
           this.alert.create("Success", "success", 5000, "Staff updated successfully.");
           this.mini = false;
         }, error => {
-          // this.spinnerService.hide();
+          this.loader.hide();
           if (error.status == 401) {
             localStorage.removeItem("token");            
             this.alert.create(
@@ -69,14 +70,14 @@ export class StaffComponent implements OnChanges {
         break;
 
       case ActionType.add:
-        // this.spinnerService.show();
+        this.loader.show();
         this.request.post(data.data, UrlPreffix.Staffs).subscribe(result => {
-          // this.spinnerService.hide();
+          this.loader.hide();
           this.list.unshift(result);
           this.alert.create("Success", "success", 5000, "Staff saved successfully.");
           this.mini = false;
         }, error => {
-          // this.spinnerService.hide();
+          this.loader.hide();
           if (error.status == 401) {
             localStorage.removeItem("token");            
             this.alert.create(
